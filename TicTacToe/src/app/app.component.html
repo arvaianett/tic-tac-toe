@@ -1,0 +1,23 @@
+<div>
+  <div>
+    <label>
+      Size:
+      <input type="text" [formControl]="tableSizeInput">
+    </label>
+    <button (click)="getTable()">Get table</button>
+  </div>
+  <div>
+    <div [formGroup]="table" *ngIf="visibleTable" class="table">
+      <div formArrayName="values" *ngFor="let item of table.controls['values'].controls; let i = index;">
+        <div [formGroupName]="i">
+          <p>X: {{item.value.x}}, Y: {{item.value.y}}</p>
+          <input formControlName="v" placeholder="Value" maxlength="1">
+      </div>
+    </div>
+    <button (click)="getResult()">Get result</button>
+    <p *ngIf="winner">Winner: {{winner}}</p>
+    <ul>
+        Possible winning situations:
+      <li *ngFor="let c of winningPossibilities">X: {{c.cell.x}}, Y: {{c.cell.y}}, Symbol: {{c.symbol}}</li>
+    </ul>
+</div>
